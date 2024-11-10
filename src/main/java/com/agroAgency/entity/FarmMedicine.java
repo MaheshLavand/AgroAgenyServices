@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import org.springframework.stereotype.Component;
+
 @Component
 @Entity
 public class FarmMedicine {
@@ -15,18 +16,26 @@ public class FarmMedicine {
 	int medId;
 	String medName;
 	String medCompany;
+	String unit;
 	String medQuantity;
+	String mfgDate;
+	String expDate;
 	int medPrice;
 
 	public FarmMedicine() {
 		super();
 	}
 
-	public FarmMedicine(String medName, String medCompany, String medQuantity, int medPrice) {
+	public FarmMedicine(int medId, String medName, String medCompany, String unit, String medQuantity, String mfgDate,
+			String expDate, int medPrice) {
 		super();
+		this.medId = medId;
 		this.medName = medName;
 		this.medCompany = medCompany;
+		this.unit = unit;
 		this.medQuantity = medQuantity;
+		this.mfgDate = mfgDate;
+		this.expDate = expDate;
 		this.medPrice = medPrice;
 	}
 
@@ -70,10 +79,35 @@ public class FarmMedicine {
 		this.medPrice = medPrice;
 	}
 
+	public String getMfgDate() {
+		return mfgDate;
+	}
+
+	public void setMfgDate(String mfgDate) {
+		this.mfgDate = mfgDate;
+	}
+
+	public String getExpDate() {
+		return expDate;
+	}
+
+	public void setExpDate(String expDate) {
+		this.expDate = expDate;
+	}
+
+	public String getUnit() {
+		return unit;
+	}
+
+	public void setUnit(String unit) {
+		this.unit = unit;
+	}
+
 	@Override
 	public String toString() {
-		return "FarmMedicine [medId=" + medId + ", medName=" + medName + ", medCompany=" + medCompany + ", medQuantity="
-				+ medQuantity + ", medPrice=" + medPrice + "]";
+		return "FarmMedicine [medId=" + medId + ", medName=" + medName + ", medCompany=" + medCompany + ", unit=" + unit
+				+ ", medQuantity=" + medQuantity + ", mfgDate=" + mfgDate + ", expDate=" + expDate + ", medPrice="
+				+ medPrice + "]";
 	}
 
 }
