@@ -53,12 +53,16 @@ public class CustomerService {
 		return customer;
 	}
 	
-	public Customer deleteCusromerPerName(String custName) {
-		Customer customer = customerDao.fetchCustomerPerName(custName);
-		if(customer != null) {
-			return customerDao.deleteCusromerPerName(customer.getCustId());
-		}
-		return customer;
+//	public Customer deleteCusromerPerName(String custName) {
+//		Customer customer = customerDao.fetchCustomerPerName(custName);
+//		if(customer != null) {
+//			return customerDao.deleteCusromerPerName(customer.getCustId());
+//		}
+//		return customer;
+//	}
+	
+	public String deleteCusromerPerName(String custName) {
+		return customerDao.deleteCusromerPerName(custName);
 	}
 	
 }

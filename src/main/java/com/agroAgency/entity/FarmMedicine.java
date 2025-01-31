@@ -1,11 +1,18 @@
 package com.agroAgency.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import org.springframework.stereotype.Component;
+
+import com.agroAgency.model.BillFarmMedicine;
 
 @Component
 @Entity
@@ -21,6 +28,9 @@ public class FarmMedicine {
 	String mfgDate;
 	String expDate;
 	int medPrice;
+
+	@OneToMany(mappedBy = "farmMedicine", cascade = CascadeType.ALL)
+	private List<BillFarmMedicine> billFarmMedicines = new ArrayList<>();
 
 	public FarmMedicine() {
 		super();
@@ -101,6 +111,14 @@ public class FarmMedicine {
 
 	public void setUnit(String unit) {
 		this.unit = unit;
+	}
+
+	public List<BillFarmMedicine> getBillFarmMedicines() {
+		return billFarmMedicines;
+	}
+
+	public void setBillFarmMedicines(List<BillFarmMedicine> billFarmMedicines) {
+		this.billFarmMedicines = billFarmMedicines;
 	}
 
 	@Override

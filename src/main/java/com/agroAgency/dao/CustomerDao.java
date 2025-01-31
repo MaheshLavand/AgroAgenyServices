@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.agroAgency.entity.Customer;
+import com.agroAgency.entity.User;
 
 @Repository
 public class CustomerDao {
@@ -24,13 +25,21 @@ public class CustomerDao {
 		session.beginTransaction().commit();
 		session.close();
 		return customer;
-
 	}
+	
+	public Customer fetchCustomerPerId(int custId) {
+        try (Session session = factory.openSession()) {
+            return session.get(Customer.class, custId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 	@SuppressWarnings("unchecked")
 	public List<Customer> fetchAllCustomers() {
 		Session session = factory.openSession();
-		Query query = session.createQuery("from Customer");
+		Criteria query = session.createCriteria(Customer.class);
 		List<Customer> custList = query.list();
 		session.close();
 		return custList;
@@ -80,12 +89,23 @@ public class CustomerDao {
 		return customer;
 	}
 
-	public Customer deleteCusromerPerName(int custId) {
-		Session session = factory.openSession();
-		Customer customer = session.get(Customer.class, custId);
-		session.delete(customer);
-		session.beginTransaction().commit();
-		return customer;
+	public String deleteCusromerPerName(String custName) {
+		Session session = null;
+		String msg = null;
+		try {
+			session = factory.openSession();
+			Customer customer = session.get(Customer.class, custName);
+			session.delete(customer);
+			session.beginTransaction().commit();
+			msg = "deleted";
+
+		} catch (Exception e) {
+			msg = null;
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return msg;
 	}
 	
 }

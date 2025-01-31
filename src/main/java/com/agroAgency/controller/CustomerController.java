@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.agroAgency.entity.Customer;
@@ -69,8 +70,8 @@ public class CustomerController {
 	}
 
 	// Delete Customers Per Name
-	@DeleteMapping("delete-cusromer-per-name/{name}")
-	public Customer deleteCusromerPerName(@PathVariable("name") String custName) {
+	@DeleteMapping("delete-cusromer-per-name")
+	public String deleteCusromerPerName(@RequestParam String custName) {
 		return customerService.deleteCusromerPerName(custName);
 	}
 
